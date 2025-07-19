@@ -1,0 +1,7 @@
+/.vs
+vc140.pdb
+vc140.idb
+.sconsign.dblite
+*.obj
+/output
+/bin
