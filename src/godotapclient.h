@@ -22,7 +22,6 @@
 #include "apclient.hpp"
 
 
-
 namespace godot {
 
     class GodotAPClient : public Object {
@@ -34,9 +33,9 @@ namespace godot {
         GodotAPClient();
         ~GodotAPClient();
 
-        void _init();
+        void connect_to_host(String game, String url);
 
-        String hello_world();
+        void poll();
 
     private:
         std::unique_ptr<APClient> ap;
