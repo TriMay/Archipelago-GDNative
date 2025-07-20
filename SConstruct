@@ -93,6 +93,13 @@ env.Append(CPPPATH=['.', godot_headers_path, cpp_bindings_path + 'include/', cpp
 env.Append(LIBPATH=[cpp_bindings_path + 'bin/'])
 env.Append(LIBS=[cpp_library])
 
+# Dependencies
+env.Append(CPPPATH=['subprojects/asio/include/'])
+env.Append(CPPPATH=['subprojects/websocketpp/'])
+env.Append(CPPPATH=['subprojects/wswrap/include/'])
+env.Append(CPPPATH=['subprojects/json/include/'])
+env.Append(CPPPATH=['subprojects/valijson/include'])
+
 # Tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=['src/'])
 sources = Glob('src/*.cpp')

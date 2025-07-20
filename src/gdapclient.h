@@ -18,6 +18,8 @@
 #include "IP.hpp"
 #include "Variant.hpp"
 
+#include "../subprojects/json/include/nlohmann/json.hpp"
+
 
 
 namespace godot {
