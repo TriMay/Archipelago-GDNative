@@ -17,6 +17,10 @@ opts.Add(EnumVariable('macos_arch', "Compilation architecture", 'arm64', ['x86_6
 
 env.Append(CPPDEFINES=['ASIO_STANDALONE'])
 env.Append(CPPDEFINES=['_WIN32_WINNT=0x0600'])
+env.Append(CPPDEFINES=['_WEBSOCKETPP_CPP11_STL_']) # @TODO this might not be the correct way to solve this
+
+env.Append(CPPDEFINES=['WSWRAP_NO_SSL']) # @TODO remove after testing
+env.Append(CPPDEFINES=['WSWRAP_NO_COMPRESSION']) # @TODO remove after testing
 
 # Local dependency paths, adapt them to your setup
 godot_headers_path = "godot-cpp/godot-headers/"

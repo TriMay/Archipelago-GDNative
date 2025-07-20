@@ -19,5 +19,4 @@ void GodotAPClient::_init() {
 
 String GodotAPClient::hello_world() {
     return "Hello World";
-    APClient
 }
