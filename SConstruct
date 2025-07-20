@@ -12,8 +12,11 @@ opts.Add(EnumVariable('platform', "Compilation platform", '', ['', 'windows', 'l
 opts.Add(EnumVariable('p', "Compilation target, alias for 'platform'", '', ['', 'windows', 'linuxbsd', 'linux', 'osx']))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
 opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'bin/'))
-opts.Add(PathVariable('target_name', 'The library name.', 'not_godotsteam', PathVariable.PathAccept))
+opts.Add(PathVariable('target_name', 'The library name.', 'godot-apclient', PathVariable.PathAccept))
 opts.Add(EnumVariable('macos_arch', "Compilation architecture", 'arm64', ['x86_64', 'arm64']))
+
+env.Append(CPPDEFINES=['ASIO_STANDALONE'])
+env.Append(CPPDEFINES=['_WIN32_WINNT=0x0600'])
 
 # Local dependency paths, adapt them to your setup
 godot_headers_path = "godot-cpp/godot-headers/"
@@ -99,6 +102,7 @@ env.Append(CPPPATH=['subprojects/websocketpp/'])
 env.Append(CPPPATH=['subprojects/wswrap/include/'])
 env.Append(CPPPATH=['subprojects/json/include/'])
 env.Append(CPPPATH=['subprojects/valijson/include'])
+env.Append(CPPPATH=['subprojects/apclientpp'])
 
 # Tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=['src/'])

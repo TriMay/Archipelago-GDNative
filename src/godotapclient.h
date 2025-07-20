@@ -1,5 +1,5 @@
-#ifndef GDAPCLIENT_H
-#define GDAPCLIENT_H
+#ifndef GODOTAPCLIENT_H
+#define GODOTAPCLIENT_H
 
 
 #include <inttypes.h>
@@ -18,24 +18,28 @@
 #include "IP.hpp"
 #include "Variant.hpp"
 
-#include "../subprojects/json/include/nlohmann/json.hpp"
+
+#include "apclient.hpp"
 
 
 
 namespace godot {
 
-    class GDAPClient : public Object {
-        GODOT_CLASS(GDAPClient, Object)
+    class GodotAPClient : public Object {
+        GODOT_CLASS(GodotAPClient, Object)
 
     public:
         static void _register_methods();
 
-        GDAPClient();
-        ~GDAPClient();
+        GodotAPClient();
+        ~GodotAPClient();
 
         void _init();
 
         String hello_world();
+
+    private:
+        std::unique_ptr<APClient> ap;
     };
 
 }
