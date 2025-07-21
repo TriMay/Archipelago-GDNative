@@ -3,23 +3,20 @@
 using namespace godot;
 
 void GodotAPClient::_register_methods() {
-    register_method("connect_to_host", &GodotAPClient::connect_to_host);
-    register_method("poll", &GodotAPClient::poll);
+    register_method("hello_world", &GodotAPClient::hello_world);
 }
 
-GodotAPClient::GodotAPClient() { }
-
-GodotAPClient::~GodotAPClient() { }
-
-void GodotAPClient::connect_to_host(String game, String url) {
-    std::string uuid = "e321d079-0848-4f83-8694-dc5d9bf2f764"; // TODO
-    // Look i know
-    // I'll figure this out later
-
-    ap.reset(new APClient(uuid, "YOMI Hustle"));
+GodotAPClient::GodotAPClient() {
 }
 
-void GodotAPClient::poll() {
-    if (ap) ap->poll();
+GodotAPClient::~GodotAPClient() {
+    // add your cleanup here
 }
 
+void GodotAPClient::_init() {
+    // initialize any variables here
+}
+
+String GodotAPClient::hello_world() {
+    return "Hello World";
+}
