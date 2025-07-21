@@ -36,10 +36,17 @@ namespace godot {
 
         void _init();
 
-        String hello_world();
+        void connect_to_host(String game, String url);
+
+        void poll();
+
 
     private:
         std::unique_ptr<APClient> ap;
+
+        void on_socket_connected();
+        void on_socket_disconnected();
+        void on_socket_error(const std::string& error);
     };
 
 }

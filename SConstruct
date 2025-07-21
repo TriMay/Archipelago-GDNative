@@ -98,7 +98,7 @@ else:
 # Make sure our binding library is properly includes
 env.Append(CPPPATH=['.', godot_headers_path, cpp_bindings_path + 'include/', cpp_bindings_path + 'include/core/', cpp_bindings_path + 'include/gen/'])
 env.Append(LIBPATH=[cpp_bindings_path + 'bin/'])
-env.Append(LIBS=[cpp_library])
+env.Append(LIBS=[cpp_library, "Shell32"])
 
 # Dependencies
 env.Append(CPPPATH=['subprojects/asio/include/'])
