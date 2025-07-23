@@ -20,7 +20,6 @@ env.Append(CPPDEFINES=['_WIN32_WINNT=0x0600'])
 env.Append(CPPDEFINES=['_WEBSOCKETPP_CPP11_STL_']) # @TODO this might not be the correct way to solve this
 
 env.Append(CPPDEFINES=['WSWRAP_NO_SSL']) # @TODO remove after testing
-env.Append(CPPDEFINES=['WSWRAP_NO_COMPRESSION']) # @TODO remove after testing
 
 # Local dependency paths, adapt them to your setup
 godot_headers_path = "godot-cpp/godot-headers/"
@@ -95,10 +94,12 @@ if env['platform'] == 'osx':
 else:
     cpp_library += '.' + str(bits)
 
+
+
 # Make sure our binding library is properly includes
 env.Append(CPPPATH=['.', godot_headers_path, cpp_bindings_path + 'include/', cpp_bindings_path + 'include/core/', cpp_bindings_path + 'include/gen/'])
 env.Append(LIBPATH=[cpp_bindings_path + 'bin/'])
-env.Append(LIBS=[cpp_library, "Shell32"])
+env.Append(LIBS=[cpp_library, 'Shell32'])
 
 # Dependencies
 env.Append(CPPPATH=['subprojects/asio/include/'])
@@ -107,6 +108,11 @@ env.Append(CPPPATH=['subprojects/wswrap/include/'])
 env.Append(CPPPATH=['subprojects/json/include/'])
 env.Append(CPPPATH=['subprojects/valijson/include'])
 env.Append(CPPPATH=['subprojects/apclientpp'])
+
+# ZLib
+env.Append(CPPPATH=['subprojects/zlib/'])
+env.Append(LIBPATH=['subprojects/zlib/'])
+env.Append(LIBS=['zlib'])
 
 # Tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=['src/'])

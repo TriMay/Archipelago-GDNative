@@ -4,3 +4,6 @@ vc140.idb
 .sconsign.dblite
 *.obj
 /bin
+CppProperties.json
+subprojects/zlib/*.dll
+subprojects/zlib/*.lib

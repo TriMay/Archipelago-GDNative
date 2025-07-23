@@ -6,7 +6,6 @@
 
 #include "map"
 
-
 #include "Godot.hpp"
 #include "Object.hpp"
 #include "OS.hpp"
@@ -39,6 +38,8 @@ namespace godot {
         void connect_to_host(String game, String url);
 
         void poll();
+
+        void connect_slot(const String& name, const String& password, int item_handling);
 
 
     private:

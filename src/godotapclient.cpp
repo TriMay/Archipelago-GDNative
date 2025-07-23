@@ -5,6 +5,7 @@ using namespace godot;
 void GodotAPClient::_register_methods() {
     register_method("connect_to_host", &GodotAPClient::connect_to_host);
     register_method("poll", &GodotAPClient::poll);
+    register_method("connect_slot", &GodotAPClient::connect_slot);
 }
 
 GodotAPClient::GodotAPClient() {
@@ -36,6 +37,23 @@ void GodotAPClient::connect_to_host(String game, String uri) {
 
 void GodotAPClient::poll() {
     if (ap) ap->poll();
+}
+
+
+void GodotAPClient::connect_slot(const String& name, const String& password, int items_handling) {
+    if (ap) {
+        //std::list<std::string> tags_list;
+        //
+        //for (int i = 0; i < tags.size(); ++i) {
+        //    godot::String gd_string = tags[i];
+        //
+        //    std::string cpp_string = gd_string.utf8().get_data();
+        //
+        //    tags_list.push_back(cpp_string);
+        //}
+
+        ap->ConnectSlot(name.utf8().get_data(), password.utf8().get_data(), items_handling);
+    }
 }
 
 
