@@ -12,3 +12,7 @@
 	path = subprojects/zlib
 	url = https://github.com/madler/zlib.git
 	branch = v1.3.1
+[submodule "subprojects/openssl"]
+	path = subprojects/openssl
+	url = https://github.com/openssl/openssl.git
+	branch = OpenSSL_1_1_1-stable
