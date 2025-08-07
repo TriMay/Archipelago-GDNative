@@ -6,8 +6,11 @@ opts = Variables([], ARGUMENTS)
 # Gets the standard flags CC, CCX, etc.
 env = DefaultEnvironment()
 
+
+# TODO debug release doesn't work, investigate why
+
 # Define our options
-opts.Add(EnumVariable('target', "Compilation target", 'release', ['r', 'release']))
+opts.Add(EnumVariable('target', "Compilation target", 'release', ['r', 'release'])) # 'd', 'debug'
 opts.Add(EnumVariable('platform', "Compilation platform", '', ['', 'windows', 'linuxbsd', 'linux', 'osx']))
 opts.Add(EnumVariable('p', "Compilation target, alias for 'platform'", '', ['', 'windows', 'linuxbsd', 'linux', 'osx']))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
@@ -19,7 +22,7 @@ env.Append(CPPDEFINES=['ASIO_STANDALONE'])
 env.Append(CPPDEFINES=['_WIN32_WINNT=0x0600'])
 env.Append(CPPDEFINES=['_WEBSOCKETPP_CPP11_STL_']) # @TODO this might not be the correct way to solve this
 
-env.Append(CPPDEFINES=['WSWRAP_NO_SSL']) # @TODO remove after testing
+#env.Append(CPPDEFINES=['WSWRAP_NO_SSL']) # @TODO remove after testing
 
 # Local dependency paths, adapt them to your setup
 godot_headers_path = "godot-cpp/godot-headers/"
@@ -81,10 +84,19 @@ elif env['platform'] == "windows":
     env.Append(CPPDEFINES=['WIN32', '_WIN32', '_WINDOWS', '_CRT_SECURE_NO_WARNINGS'])
     env.Append(CCFLAGS=['-W3', '-GR', '-FS'])
     env.Append(CXXFLAGS='/std:c++17')
-    env.Append(CPPDEFINES=['NDEBUG'])
-    env.Append(CCFLAGS=['-O2', '-EHsc', '-MD'])
+    
+    if env['target'] in ('debug', 'd'):
+        env.Append(CPPDEFINES=['_DEBUG'])
+        env.Append(CCFLAGS=['-EHsc', '-MDd', '-ZI'])
+        env.Append(LINKFLAGS=['-DEBUG'])
+    else:
+        env.Append(CPPDEFINES=['NDEBUG'])
+        env.Append(CCFLAGS=['-O2', '-EHsc', '-MD'])
 
-cpp_library += '.release'
+if env['target'] in ('debug', 'd'):
+    cpp_library += '.debug'
+else:
+    cpp_library += '.release'
 
 if env['platform'] == 'osx':
     if env['macos_arch'] == 'x86_64':
@@ -109,10 +121,15 @@ env.Append(CPPPATH=['subprojects/json/include/'])
 env.Append(CPPPATH=['subprojects/valijson/include'])
 env.Append(CPPPATH=['subprojects/apclientpp'])
 
-# ZLib
+# ZLib Linking
 env.Append(CPPPATH=['subprojects/zlib/'])
 env.Append(LIBPATH=['subprojects/zlib/'])
 env.Append(LIBS=['zlib'])
+
+# OpenSSL Linking
+env.Append(CPPPATH=['subprojects/openssl/include/'])
+env.Append(LIBPATH=['subprojects/openssl/'])
+env.Append(LIBS=['libssl_static', 'libcrypto_static', 'WS2_32', 'Gdi32', 'AdvAPI32', 'Crypt32', 'User32'])
 
 # Tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=['src/'])

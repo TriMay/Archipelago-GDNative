@@ -5,5 +5,4 @@ vc140.idb
 *.obj
 /bin
 CppProperties.json
-subprojects/zlib/*.dll
-subprojects/zlib/*.lib
+subprojects/zlib/*

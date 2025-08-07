@@ -16,9 +16,12 @@
 #include "Dictionary.hpp"
 #include "IP.hpp"
 #include "Variant.hpp"
+#include "JSON.hpp"
+#include "JSONParseResult.hpp"
 
 
 #include "apclient.hpp"
+// include "apuuid.hpp" TODO FIXME for some reason this compile errors
 
 
 
@@ -39,15 +42,17 @@ namespace godot {
 
         void poll();
 
-        void connect_slot(const String& name, const String& password, int item_handling);
+        void connect_slot(const String& name, const String& password, int items_handling, PoolStringArray tags);
+
+        void send_say(const String& text);
+
+        void send_location_checks(Array locations_array);
+
+        //void connect_update();
 
 
     private:
         std::unique_ptr<APClient> ap;
-
-        void on_socket_connected();
-        void on_socket_disconnected();
-        void on_socket_error(const std::string& error);
     };
 
 }
